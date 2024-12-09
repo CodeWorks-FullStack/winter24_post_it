@@ -1,8 +1,11 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { albumsService } from '@/services/AlbumsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
+
+const albums = computed(() => AppState.albums)
 
 onMounted(() => {
   getAlbums()
@@ -19,7 +22,8 @@ async function getAlbums() {
 </script>
 
 <template>
-  <h1>Projects</h1>
+  <h1>Albums</h1>
+  <div>{{ albums }}</div>
 </template>
 
 <style scoped lang="scss"></style>
