@@ -6,6 +6,10 @@ class AlbumsService {
     await album.populate('creator', 'name picture')
     return album
   }
+  async getAllAlbums() {
+    const albums = await dbContext.Albums.find().populate('creator', 'name picture')
+    return albums
+  }
 }
 
 export const albumsService = new AlbumsService()
