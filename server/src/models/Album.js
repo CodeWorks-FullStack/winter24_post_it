@@ -15,3 +15,10 @@ export const AlbumSchema = new Schema(
     toJSON: { virtuals: true }
   }
 )
+
+AlbumSchema.virtual('creator', {
+  localField: 'creatorId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
