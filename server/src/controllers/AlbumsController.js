@@ -7,6 +7,7 @@ export class AlbumsController extends BaseController {
     super('api/albums')
     this.router
       .get('', this.getAllAlbums)
+      .get('/:albumId', this.getAlbumById)
       .use(Auth0Provider.getAuthorizedUserInfo) // you must be logged in to do any method AFTER the .use
       .post('', this.createAlbum)
   }
@@ -40,6 +41,22 @@ export class AlbumsController extends BaseController {
     try {
       const albums = await albumsService.getAllAlbums()
       response.send(albums)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+  * returns a single album from the database using the id from the route parameters
+  * @param {import("express").Request} request
+  * @param {import("express").Response} response
+  * @param {import("express").NextFunction} next
+  */
+  async getAlbumById(request, response, next) {
+    try {
+      const albumId = request.params.albumId
+      const album = await albumsService.getAlbumById(albumId)
+      response.send(album)
     } catch (error) {
       next(error)
     }
