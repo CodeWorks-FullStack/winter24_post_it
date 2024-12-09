@@ -10,6 +10,7 @@ export class AlbumsController extends BaseController {
       .get('/:albumId', this.getAlbumById)
       .use(Auth0Provider.getAuthorizedUserInfo) // you must be logged in to do any method AFTER the .use
       .post('', this.createAlbum)
+      .delete('/:albumId', this.archiveAlbum)
   }
 
 
@@ -56,6 +57,22 @@ export class AlbumsController extends BaseController {
     try {
       const albumId = request.params.albumId
       const album = await albumsService.getAlbumById(albumId)
+      response.send(album)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+  * flip the archived boolean property on an album using the supplied id from route parameters
+  * @param {import("express").Request} request
+  * @param {import("express").Response} response
+  * @param {import("express").NextFunction} next
+  */
+  async archiveAlbum(request, response, next) {
+    try {
+      const albumId = request.params.albumId
+      const album = await albumsService.archiveAlbum(albumId)
       response.send(album)
     } catch (error) {
       next(error)
