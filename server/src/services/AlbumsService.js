@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
+import { Forbidden } from "../utils/Errors.js"
 
 class AlbumsService {
 
@@ -21,8 +22,12 @@ class AlbumsService {
     return album
   }
 
-  async archiveAlbum(albumId) {
+  async archiveAlbum(albumId, userId) {
     const albumToArchive = await this.getAlbumById(albumId)
+
+    if (albumToArchive.creatorId != userId) {
+      throw new Forbidden("YOU ARE NOT ALLOWED TO ARCHIVE SOMEONE ELSE'S ALBUM, PAL")
+    }
 
     // flips bool
     albumToArchive.archived = !albumToArchive.archived

@@ -72,7 +72,8 @@ export class AlbumsController extends BaseController {
   async archiveAlbum(request, response, next) {
     try {
       const albumId = request.params.albumId
-      const album = await albumsService.archiveAlbum(albumId)
+      const userId = request.userInfo.id
+      const album = await albumsService.archiveAlbum(albumId, userId)
       response.send(album)
     } catch (error) {
       next(error)
