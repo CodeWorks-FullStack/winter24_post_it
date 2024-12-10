@@ -26,8 +26,7 @@ async function getAlbumById() {
 
 async function archiveAlbum() {
   try {
-
-    const yes = await Pop.confirm(`Are you sure that you want to archive the ${album.value.title} album?`, "It's a pretty cool album", "Yes I am sure!")
+    const yes = await Pop.confirm(`Are you sure that you want to ${album.value.archived ? 'unarchive' : 'archive'} the ${album.value.title} album?`, "It's a pretty cool album", "Yes I am sure!")
 
     if (!yes) return
 
@@ -64,7 +63,7 @@ async function archiveAlbum() {
               <div>
                 <span class="bg-info rounded-pill px-3">{{ album.category }}</span>
                 <span @click="archiveAlbum()" class="bg-danger rounded-pill px-3 ms-2" role="button">
-                  Archive Album
+                  {{ album.archived ? 'Unarchive' : 'Archive' }} Album
                 </span>
               </div>
               <div>
