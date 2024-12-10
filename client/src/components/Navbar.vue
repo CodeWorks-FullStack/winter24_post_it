@@ -1,7 +1,10 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { AppState } from '@/AppState.js';
+
+const account = computed(() => AppState.account)
 
 const theme = ref(loadState('theme') || 'light')
 
@@ -32,7 +35,7 @@ function toggleTheme() {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#albumModal">
+          <button v-if="account" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#albumModal">
             New Album <i class="mdi mdi-plus-thick"></i>
           </button>
         </li>
