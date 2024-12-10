@@ -4,6 +4,7 @@ import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { Modal } from 'bootstrap';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const categories = ['aesthetics', 'food', 'games', 'animals', 'vibes', 'misc']
 
@@ -14,9 +15,18 @@ const editableAlbumData = ref({
   category: ''
 })
 
+// NOTE router allows us to change route information
+const router = useRouter()
+
 async function createAlbum() {
   try {
-    await albumsService.createAlbum(editableAlbumData.value)
+    if (editableAlbumData.value.description == '') {
+      delete editableAlbumData.value.description
+    }
+
+    // NOTE service returns the newly created album
+    const album = await albumsService.createAlbum(editableAlbumData.value)
+
     // clears form
     editableAlbumData.value = {
       title: '',
@@ -24,8 +34,12 @@ async function createAlbum() {
       coverImg: '',
       category: ''
     }
+
     // close the modal
     Modal.getInstance('#albumModal').hide()
+
+    // navigates to the album details page for newly created album
+    router.push({ name: 'Album Details', params: { albumId: album.id } })
   } catch (error) {
     Pop.meow(error)
     logger.error('[CREATING ALBUM]', error)

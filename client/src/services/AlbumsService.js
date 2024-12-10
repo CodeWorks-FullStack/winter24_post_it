@@ -23,6 +23,7 @@ class AlbumsService {
     const album = new Album(response.data)
     // NOTE only unshift if api sorts data my showing newest first, otherwise push
     AppState.albums.unshift(album)
+    return album
   }
   async getAlbums() {
     const response = await api.get('api/albums')
