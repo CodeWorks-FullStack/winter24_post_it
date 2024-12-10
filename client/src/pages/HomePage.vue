@@ -76,4 +76,9 @@ async function getAlbums() {
     text-shadow: 1px 1px 2px black;
   }
 }
+
+h2 {
+  text-shadow: 1px 1px 2px black;
+
+}
 </style>
