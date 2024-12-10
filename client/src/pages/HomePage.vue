@@ -33,12 +33,12 @@ async function getAlbums() {
       </div>
     </section>
     <section class="row">
-      <div class="col-12">
+      <div class="col-12 mb-3">
         <div class="text-light border-bottom border-primary border-1">
           <h2>Popular Albums</h2>
         </div>
       </div>
-      <div v-for="album in albums" :key="album.id" class="col-md-4">
+      <div v-for="album in albums" :key="album.id" class="col-md-4 mb-3">
         <AlbumCard :album="album" />
       </div>
     </section>
