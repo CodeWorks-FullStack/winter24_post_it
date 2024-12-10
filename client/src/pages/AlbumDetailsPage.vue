@@ -24,13 +24,15 @@ async function getAlbumById() {
   }
 }
 
-async function archiveAlbum(albumId) {
+async function archiveAlbum() {
   try {
-    console.log(route.params.albumId)
-    console.log(album.value.id);
-    console.log(AppState.activeAlbum.id);
-    console.log(albumId);
 
+    const yes = await Pop.confirm(`Are you sure that you want to archive the ${album.value.title} album?`, "It's a pretty cool album", "Yes I am sure!")
+
+    if (!yes) return
+
+    const albumId = route.params.albumId
+    await albumsService.archiveAlbum(albumId)
   } catch (error) {
     Pop.meow(error)
     logger.error('[ARCHIVING ALBUM]', error)
@@ -50,14 +52,18 @@ async function archiveAlbum(albumId) {
           <div class="m-2 p-2 glass-card">
             <div class="mb-5">
               <div class="text-center">
-                <b class="fs-3">{{ album.title }}</b>
+                <b class="fs-3">
+                  {{ album.title }}
+                  <i v-if="album.archived" class="mdi mdi-alert text-warning"
+                    :title="`${album.title} is archived and no longer accpeting new pictures`"></i>
+                </b>
               </div>
               <p class="mx-5">{{ album.description }}</p>
             </div>
             <div class="d-md-flex justify-content-between align-items-center">
               <div>
                 <span class="bg-info rounded-pill px-3">{{ album.category }}</span>
-                <span @click="archiveAlbum(album.id)" class="bg-danger rounded-pill px-3 ms-2" role="button">
+                <span @click="archiveAlbum()" class="bg-danger rounded-pill px-3 ms-2" role="button">
                   Archive Album
                 </span>
               </div>
