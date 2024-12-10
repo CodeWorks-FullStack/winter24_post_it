@@ -3,16 +3,16 @@ import { AppState } from '@/AppState.js';
 import { albumsService } from '@/services/AlbumsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const album = computed(() => AppState.activeAlbum)
 
 const route = useRoute()
 
-onMounted(() => {
+watch(route, () => {
   getAlbumById()
-})
+}, { immediate: true })
 
 async function getAlbumById() {
   try {
