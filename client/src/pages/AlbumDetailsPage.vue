@@ -23,6 +23,19 @@ async function getAlbumById() {
     logger.error('[GETTING ALBUM BY ID]', error)
   }
 }
+
+async function archiveAlbum(albumId) {
+  try {
+    console.log(route.params.albumId)
+    console.log(album.value.id);
+    console.log(AppState.activeAlbum.id);
+    console.log(albumId);
+
+  } catch (error) {
+    Pop.meow(error)
+    logger.error('[ARCHIVING ALBUM]', error)
+  }
+}
 </script>
 
 
@@ -41,10 +54,12 @@ async function getAlbumById() {
               </div>
               <p class="mx-5">{{ album.description }}</p>
             </div>
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-md-flex justify-content-between align-items-center">
               <div>
                 <span class="bg-info rounded-pill px-3">{{ album.category }}</span>
-                <span class="bg-danger rounded-pill px-3 ms-2" role="button">Archive Album</span>
+                <span @click="archiveAlbum(album.id)" class="bg-danger rounded-pill px-3 ms-2" role="button">
+                  Archive Album
+                </span>
               </div>
               <div>
                 <span>created by {{ album.creator.name }}</span>
