@@ -5,6 +5,7 @@ import { Album } from "@/models/Album.js"
 
 class AlbumsService {
   async getAlbumById(albumId) {
+    AppState.activeAlbum = null
     const response = await api.get(`api/albums/${albumId}`)
     logger.log('GOT ALBUM BY ID', response.data)
     const album = new Album(response.data)

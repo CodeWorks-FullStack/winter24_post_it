@@ -16,7 +16,7 @@ defineProps({
         <div>
           <span class="mb-1"><b>{{ album.title }}</b></span>
           <div>
-            <img :src="album.creator.picture" :alt="album.creator.name">
+            <img :src="album.creator.picture" :alt="album.creator.name" class="creator-img">
             <span class="ms-3">{{ album.creator.name }}</span>
           </div>
         </div>
@@ -38,16 +38,9 @@ defineProps({
   background-position: center;
 }
 
-.glass-card {
-  border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.742);
-  backdrop-filter: blur(10px);
-}
+
 
 img {
   height: 2rem;
-  border-radius: 50%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
 }
 </style>

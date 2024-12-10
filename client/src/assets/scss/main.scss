@@ -22,3 +22,15 @@ main {
 a {
   text-decoration: none;
 }
+
+.glass-card {
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.742);
+  backdrop-filter: blur(10px);
+}
+
+.creator-img {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
