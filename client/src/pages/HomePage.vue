@@ -39,7 +39,7 @@ async function getAlbums() {
 
 <template>
   <div class="container text-light">
-    <section class="row my-4">
+    <section class="row mt-4">
       <div class="col-12 mb-3">
         <div class="border-bottom border-primary border-1">
           <h2>Find Your Interest</h2>
@@ -69,6 +69,9 @@ async function getAlbums() {
 
 <style scoped lang="scss">
 .filter-button {
+  background-size: cover;
+  background-position: center;
+
   b {
     text-shadow: 1px 1px 2px black;
   }
