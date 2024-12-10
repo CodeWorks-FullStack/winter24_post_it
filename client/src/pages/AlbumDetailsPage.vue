@@ -7,6 +7,7 @@ import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const album = computed(() => AppState.activeAlbum)
+const account = computed(() => AppState.account)
 
 const route = useRoute()
 
@@ -62,7 +63,8 @@ async function archiveAlbum() {
             <div class="d-md-flex justify-content-between align-items-center">
               <div>
                 <span class="bg-info rounded-pill px-3">{{ album.category }}</span>
-                <span @click="archiveAlbum()" class="bg-danger rounded-pill px-3 ms-2" role="button">
+                <span v-if="album.creatorId == account?.id" @click="archiveAlbum()"
+                  class="bg-danger rounded-pill px-3 ms-2" role="button">
                   {{ album.archived ? 'Unarchive' : 'Archive' }} Album
                 </span>
               </div>
