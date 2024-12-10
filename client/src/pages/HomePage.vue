@@ -22,8 +22,16 @@ async function getAlbums() {
 </script>
 
 <template>
-  <h1>Albums</h1>
-  <div>{{ albums }}</div>
+  <div class="container">
+    <section class="row">
+      <div class="col-12">
+        <div class="text-primary">
+          <h2>Find Your Interest</h2>
+
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <style scoped lang="scss"></style>
