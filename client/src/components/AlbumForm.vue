@@ -70,7 +70,7 @@ async function createAlbum() {
       <select v-model="editableAlbumData.category" class="form-select text-capitalize" id="category"
         aria-label="Album Category" required>
         <option selected value="" disabled>Choose a category</option>
-        <option v-for="category in categories" :key="category" :value="category" class="text-capitalize">
+        <option v-for="category in categories" :key="'option-' + category" :value="category" class="text-capitalize">
           {{ category }}
         </option>
       </select>
