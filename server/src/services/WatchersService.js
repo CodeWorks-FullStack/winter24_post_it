@@ -1,6 +1,10 @@
 import { dbContext } from "../db/DbContext.js"
 
 class WatchersService {
+  async getMyWatchedAlbums(userId) {
+    const watchedAlbums = await dbContext.Watchers.find({ accountId: userId }).populate('album')
+    return watchedAlbums
+  }
 
   async createWatcher(watcherData) {
     const watcher = await dbContext.Watchers.create(watcherData)
