@@ -22,3 +22,10 @@ AlbumSchema.virtual('creator', {
   foreignField: '_id',
   justOne: true
 })
+
+AlbumSchema.virtual('watcherCount', {
+  localField: '_id',
+  ref: 'Watcher',
+  foreignField: 'albumId',
+  count: true //don't return the documents, just count them
+})
