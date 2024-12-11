@@ -3,7 +3,13 @@ import { Forbidden } from "../utils/Errors.js"
 
 class WatchersService {
   async getMyWatchedAlbums(userId) {
-    const watchedAlbums = await dbContext.Watchers.find({ accountId: userId }).populate('album')
+    const watchedAlbums = await dbContext.Watchers.find({ accountId: userId }).populate({
+      path: 'album',
+      populate: {
+        path: 'creator watcherCount',
+        select: 'name picture'
+      }
+    })
     return watchedAlbums
   }
 
