@@ -23,8 +23,7 @@ defineProps({
           </div>
         </div>
         <div>
-          <!-- TODO display watcher count when backend supports it -->
-          <b>0</b> <i class="mdi mdi-account-multiple"></i>
+          <b>{{ album.watcherCount }}</b> <i class="mdi mdi-account-multiple"></i>
         </div>
       </div>
     </div>
