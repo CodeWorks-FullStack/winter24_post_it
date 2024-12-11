@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { albumsService } from '@/services/AlbumsService.js';
+import { watchersService } from '@/services/WatchersService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, watch } from 'vue';
@@ -13,6 +14,7 @@ const route = useRoute()
 
 watch(route, () => {
   getAlbumById()
+  getWatcherProfilesByAlbumId()
 }, { immediate: true })
 
 async function getAlbumById() {
@@ -36,6 +38,16 @@ async function archiveAlbum() {
   } catch (error) {
     Pop.meow(error)
     logger.error('[ARCHIVING ALBUM]', error)
+  }
+}
+
+async function getWatcherProfilesByAlbumId() {
+  try {
+    const albumId = route.params.albumId
+    await watchersService.getWatcherProfilesByAlbumId(albumId)
+  } catch (error) {
+    Pop.meow(error)
+    logger.error('[GETTING WATCHER PROFILES]', error)
   }
 }
 </script>
@@ -76,6 +88,23 @@ async function archiveAlbum() {
           </div>
         </div>
       </section>
+      <div class="row mt-3">
+        <!-- ANCHOR watcher section -->
+        <section class="col-md-4 p-0">
+          <div class="d-flex">
+            <div class="glass-card p-1 flex-grow-1">
+              <b class="d-block">0</b>
+              <b>Watchers</b>
+            </div>
+            <button class="btn btn-info">
+              <i class="d-block mdi mdi-account-plus"></i>
+              Watch
+            </button>
+          </div>
+        </section>
+        <!-- ANCHOR pictures section -->
+        <section class="col-md-8"></section>
+      </div>
     </div>
     <div v-else class="container">
       <section class="row">

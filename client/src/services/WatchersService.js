@@ -4,6 +4,10 @@ import { Watcher } from "@/models/Watcher.js"
 import { AppState } from "@/AppState.js"
 
 class WatchersService {
+  async getWatcherProfilesByAlbumId(albumId) {
+    const response = await api.get(`api/albums/${albumId}/watchers`)
+    logger.log('GOT WATCHER PROFILES', response.data)
+  }
   async deleteWatcher(watcherId) {
     const response = await api.delete(`api/watchers/${watcherId}`)
     logger.log('DELETED WATCHER', response.data)

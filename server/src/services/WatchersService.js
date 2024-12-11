@@ -32,7 +32,8 @@ class WatchersService {
       throw new Forbidden("YOU ARE NOT ALLOWED TO DELETE SOMEONE ELSE'S WATCHER, BUD")
     }
 
-    await watcherToDelete.deleteOne()
+    await watcherToDelete.deleteOne() // removes the document from the database
+
     return 'No longer watching that album'
   }
 }
