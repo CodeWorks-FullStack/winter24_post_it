@@ -24,6 +24,10 @@ async function getMyWatchedAlbums() {
 
 async function deleteWatcher(watcherId) {
   try {
+    const yes = await Pop.confirm('Are you sure you want to stop watching this album?')
+
+    if (!yes) return
+
     await watchersService.deleteWatcher(watcherId)
   } catch (error) {
     Pop.meow(error)
