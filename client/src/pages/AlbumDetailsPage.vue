@@ -10,6 +10,7 @@ import { useRoute } from 'vue-router';
 const album = computed(() => AppState.activeAlbum)
 const account = computed(() => AppState.account)
 const watcherProfiles = computed(() => AppState.watcherProfiles)
+const isWatching = computed(() => watcherProfiles.value.some(watcherProfile => watcherProfile.accountId == account.value?.id))
 
 const route = useRoute()
 
@@ -108,10 +109,16 @@ async function createWatcher() {
               <b class="d-block">{{ watcherProfiles.length }}</b>
               <b>Watchers</b>
             </div>
-            <button @click="createWatcher()" class="btn btn-info">
-              <i class="d-block mdi mdi-account-plus"></i>
-              Watch
-            </button>
+            <div v-if="account">
+              <button v-if="isWatching" class="btn btn-danger" disabled>
+                <i class="d-block mdi mdi-heart"></i>
+                Watching
+              </button>
+              <button v-else @click="createWatcher()" class="btn btn-info">
+                <i class="d-block mdi mdi-account-plus"></i>
+                Watch
+              </button>
+            </div>
           </div>
           <div class="row mt-3">
             <div v-for="watcherProfile in watcherProfiles" :key="watcherProfile.id" class="col-4 mb-3">
