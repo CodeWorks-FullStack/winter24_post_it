@@ -54,6 +54,7 @@ async function getWatcherProfilesByAlbumId() {
 
 async function createWatcher() {
   try {
+    // NOTE the request body must be an object
     const albumData = { albumId: route.params.albumId }
     await watchersService.createWatcher(albumData)
   } catch (error) {
@@ -104,7 +105,7 @@ async function createWatcher() {
         <section class="col-md-4 p-0">
           <div class="d-flex">
             <div class="glass-card p-1 flex-grow-1">
-              <b class="d-block">0</b>
+              <b class="d-block">{{ watcherProfiles.length }}</b>
               <b>Watchers</b>
             </div>
             <button @click="createWatcher()" class="btn btn-info">
