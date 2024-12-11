@@ -15,7 +15,8 @@ defineProps({
         <!-- TODO get random color -->
         <div>
           <span class="mb-1"><b>{{ album.title }}</b></span>
-          <div>
+          <!-- NOTE stops component from breaking if album do not have creator populated -->
+          <div v-if="album.creator">
             <img :src="album.creator.picture" :alt="album.creator.name" class="creator-img">
             <span class="ms-3">{{ album.creator.name }}</span>
           </div>

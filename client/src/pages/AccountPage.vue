@@ -4,8 +4,10 @@ import { AppState } from '../AppState.js';
 import Pop from '@/utils/Pop.js';
 import { logger } from '@/utils/Logger.js';
 import { watchersService } from '@/services/WatchersService.js';
+import AlbumCard from '@/components/AlbumCard.vue';
 
 const account = computed(() => AppState.account)
+const watchedAlbums = computed(() => AppState.watchedAlbums)
 
 onMounted(() => {
   getMyWatchedAlbums()
@@ -33,7 +35,13 @@ async function getMyWatchedAlbums() {
                 welcome back {{ account.name }} <img :src="account.picture" :alt="account.name"
                   class="creator-img ms-2">
               </span>
+              <p class="mt-2">you are watching {{ watchedAlbums.length }} albums</p>
             </div>
+          </div>
+        </section>
+        <section class="row">
+          <div v-for="watchedAlbum in watchedAlbums" :key="watchedAlbum.id" class="col-md-4 mb-3">
+            <AlbumCard :album="watchedAlbum.album" />
           </div>
         </section>
       </div>
