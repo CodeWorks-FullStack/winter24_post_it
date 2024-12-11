@@ -51,6 +51,16 @@ async function getWatcherProfilesByAlbumId() {
     logger.error('[GETTING WATCHER PROFILES]', error)
   }
 }
+
+async function createWatcher() {
+  try {
+    const albumData = { albumId: route.params.albumId }
+    await watchersService.createWatcher(albumData)
+  } catch (error) {
+    Pop.meow(error)
+    logger.error('[CREATING WATCHER]', error)
+  }
+}
 </script>
 
 
@@ -61,7 +71,7 @@ async function getWatcherProfilesByAlbumId() {
     <div v-if="album" class="container">
       <section class="row album-hero justify-content-center align-items-end"
         :style="{ backgroundImage: `url(${album.coverImg})` }">
-        <div class="col-8 ">
+        <div class="col-11 col-md-8">
           <div class="m-2 p-2 glass-card">
             <div class="mb-5">
               <div class="text-center">
@@ -97,13 +107,13 @@ async function getWatcherProfilesByAlbumId() {
               <b class="d-block">0</b>
               <b>Watchers</b>
             </div>
-            <button class="btn btn-info">
+            <button @click="createWatcher()" class="btn btn-info">
               <i class="d-block mdi mdi-account-plus"></i>
               Watch
             </button>
           </div>
           <div class="row mt-3">
-            <div v-for="watcherProfile in watcherProfiles" :key="watcherProfile.id" class="col-4">
+            <div v-for="watcherProfile in watcherProfiles" :key="watcherProfile.id" class="col-4 mb-3">
               <img :src="watcherProfile.profile.picture" :alt="watcherProfile.profile.name" class="img-fluid rounded"
                 :title="watcherProfile.profile.name">
             </div>
