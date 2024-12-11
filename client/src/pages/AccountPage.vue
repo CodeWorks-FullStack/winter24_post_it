@@ -22,6 +22,15 @@ async function getMyWatchedAlbums() {
   }
 }
 
+async function deleteWatcher(watcherId) {
+  try {
+    await watchersService.deleteWatcher(watcherId)
+  } catch (error) {
+    Pop.meow(error)
+    logger.error('[DELETE WATCHER]', error)
+  }
+}
+
 </script>
 
 <template>
@@ -42,6 +51,11 @@ async function getMyWatchedAlbums() {
         <section class="row">
           <div v-for="watchedAlbum in watchedAlbums" :key="watchedAlbum.id" class="col-md-4 mb-3">
             <AlbumCard :album="watchedAlbum.album" />
+            <div class="mt-1 text-end">
+              <button @click="deleteWatcher(watchedAlbum.id)" class="btn btn-danger">
+                leave <i class="mdi mdi-door-closed-cancel"></i>
+              </button>
+            </div>
           </div>
         </section>
       </div>

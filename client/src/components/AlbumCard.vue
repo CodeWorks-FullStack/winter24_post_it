@@ -16,6 +16,7 @@ defineProps({
         <div>
           <span class="mb-1"><b>{{ album.title }}</b></span>
           <!-- NOTE stops component from breaking if album do not have creator populated -->
+          <!-- TODO show how to fix this on the server -->
           <div v-if="album.creator">
             <img :src="album.creator.picture" :alt="album.creator.name" class="creator-img">
             <span class="ms-3">{{ album.creator.name }}</span>
