@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
+import { Forbidden } from "../utils/Errors.js"
 
 class WatchersService {
   async getMyWatchedAlbums(userId) {
@@ -17,6 +18,22 @@ class WatchersService {
     //                                             { albumId: '6759c34aaeb2cbc36cce4664' }
     const watchers = await dbContext.Watchers.find({ albumId: albumId }).populate('profile', 'name picture')
     return watchers
+  }
+
+
+  async deleteWatcher(watcherId, userId) {
+    const watcherToDelete = await dbContext.Watchers.findById(watcherId)
+
+    if (watcherToDelete == null) {
+      throw new Error(`Invalid watcher id: ${watcherId}`)
+    }
+
+    if (watcherToDelete.accountId != userId) {
+      throw new Forbidden("YOU ARE NOT ALLOWED TO DELETE SOMEONE ELSE'S WATCHER, BUD")
+    }
+
+    await watcherToDelete.deleteOne()
+    return 'No longer watching that album'
   }
 }
 
