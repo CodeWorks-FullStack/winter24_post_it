@@ -9,6 +9,7 @@ import { useRoute } from 'vue-router';
 
 const album = computed(() => AppState.activeAlbum)
 const account = computed(() => AppState.account)
+const watcherProfiles = computed(() => AppState.watcherProfiles)
 
 const route = useRoute()
 
@@ -100,6 +101,12 @@ async function getWatcherProfilesByAlbumId() {
               <i class="d-block mdi mdi-account-plus"></i>
               Watch
             </button>
+          </div>
+          <div class="row mt-3">
+            <div v-for="watcherProfile in watcherProfiles" :key="watcherProfile.id" class="col-4">
+              <img :src="watcherProfile.profile.picture" :alt="watcherProfile.profile.name" class="img-fluid rounded"
+                :title="watcherProfile.profile.name">
+            </div>
           </div>
         </section>
         <!-- ANCHOR pictures section -->
