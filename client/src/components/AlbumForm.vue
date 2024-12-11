@@ -35,7 +35,7 @@ async function createAlbum() {
       category: ''
     }
 
-    // close the modal
+    // closes the modal
     Modal.getInstance('#albumModal').hide()
 
     // navigates to the album details page for newly created album
