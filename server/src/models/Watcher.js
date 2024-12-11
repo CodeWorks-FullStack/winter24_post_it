@@ -10,3 +10,17 @@ export const WatcherSchema = new Schema(
     timestamps: true
   }
 )
+
+WatcherSchema.virtual('profile', {
+  localField: 'accountId',
+  ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
+
+WatcherSchema.virtual('album', {
+  localField: 'albumId',
+  ref: 'Album',
+  foreignField: '_id',
+  justOne: true
+})
