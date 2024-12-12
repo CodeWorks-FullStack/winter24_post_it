@@ -13,6 +13,8 @@ export const AppState = reactive({
   /** @type {import('./models/Watcher.js').Watcher[]} */
   watchedAlbums: [],
   /** @type {import('./models/Watcher.js').Watcher[]} */
-  watcherProfiles: []
+  watcherProfiles: [],
+  /** @type {import('./models/Picture.js').Picture[]} */
+  pictures: []
 })
 
