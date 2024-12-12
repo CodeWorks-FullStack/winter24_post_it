@@ -2,6 +2,7 @@
 import { picturesService } from '@/services/PicturesService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
+import { Modal } from 'bootstrap';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -16,6 +17,7 @@ async function createPicture() {
   try {
     await picturesService.createPicture(editablePictureData.value)
     editablePictureData.value.imgUrl = ''
+    Modal.getInstance('#pictureModal').hide()
   } catch (error) {
     Pop.meow(error)
     logger.error('[CREATING PICTURE]', error)

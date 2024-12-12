@@ -151,7 +151,7 @@ async function getPicturesByAlbumId() {
           </div>
         </section>
       </div>
-      <button data-bs-toggle="modal" data-bs-target="#pictureModal"
+      <button v-if="account" :disabled="album.archived" data-bs-toggle="modal" data-bs-target="#pictureModal"
         class="btn btn-success rounded-pill picture-button m-2">
         Create Picture <i class="mdi mdi-plus-box"></i>
       </button>
@@ -187,7 +187,7 @@ async function getPicturesByAlbumId() {
 }
 
 .picture-button {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
 }
