@@ -21,7 +21,7 @@ class AlbumsService {
     const response = await api.post('api/albums', albumData)
     logger.log('CREATED ALBUM', response.data)
     const album = new Album(response.data)
-    // NOTE only unshift if api sorts data my showing newest first, otherwise push
+    // NOTE only unshift if api sorts data showing newest first, otherwise push
     AppState.albums.unshift(album)
     return album
   }

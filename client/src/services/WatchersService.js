@@ -24,6 +24,7 @@ class WatchersService {
     AppState.watchedAlbums.splice(watcherIndex, 1)
   }
   async getMyWatchedAlbums() {
+    AppState.watchedAlbums = []
     const response = await api.get('account/watching')
     logger.log('GOT ALBUMS I AM WATCHING', response.data)
     const watchers = response.data.map(watcherPOJO => new Watcher(watcherPOJO))
