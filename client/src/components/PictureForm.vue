@@ -15,6 +15,7 @@ const editablePictureData = ref({
 async function createPicture() {
   try {
     await picturesService.createPicture(editablePictureData.value)
+    editablePictureData.value.imgUrl = ''
   } catch (error) {
     Pop.meow(error)
     logger.error('[CREATING PICTURE]', error)

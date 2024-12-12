@@ -7,6 +7,8 @@ class PicturesService {
   async createPicture(pictureData) {
     const response = await api.post('api/pictures', pictureData)
     logger.log('CREATED PICTURE', response.data)
+    const picture = new Picture(response.data)
+    AppState.pictures.push(picture)
   }
   async getPicturesByAlbumId(albumId) {
     const response = await api.get(`api/albums/${albumId}/pictures`)
