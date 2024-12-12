@@ -10,6 +10,7 @@ import { useRoute } from 'vue-router';
 const album = computed(() => AppState.activeAlbum)
 const account = computed(() => AppState.account)
 const watcherProfiles = computed(() => AppState.watcherProfiles)
+// NOTE some is an array method that will return true if your condition is ever met, and false if it is not
 const isWatching = computed(() => watcherProfiles.value.some(watcherProfile => watcherProfile.accountId == account.value?.id))
 
 const route = useRoute()
@@ -71,6 +72,7 @@ async function createWatcher() {
 
     <!-- NOTE don't forget the v-if for potentially null data -->
     <div v-if="album" class="container">
+      <!-- ANCHOR album hero -->
       <section class="row album-hero justify-content-center align-items-end"
         :style="{ backgroundImage: `url(${album.coverImg})` }">
         <div class="col-11 col-md-8">
@@ -80,7 +82,7 @@ async function createWatcher() {
                 <b class="fs-3">
                   {{ album.title }}
                   <i v-if="album.archived" class="mdi mdi-alert text-warning"
-                    :title="`${album.title} is archived and no longer accpeting new pictures`"></i>
+                    :title="`${album.title} is archived and no longer accepting new pictures`"></i>
                 </b>
               </div>
               <p class="mx-5">{{ album.description }}</p>
@@ -105,7 +107,7 @@ async function createWatcher() {
         <!-- ANCHOR watcher section -->
         <section class="col-md-4 p-0">
           <div class="d-flex">
-            <div class="glass-card p-1 flex-grow-1">
+            <div class="glass-card px-4 py-1 flex-grow-1">
               <b class="d-block">{{ watcherProfiles.length }}</b>
               <b>Watchers</b>
             </div>
@@ -139,7 +141,6 @@ async function createWatcher() {
       </section>
     </div>
   </div>
-
 </template>
 
 

@@ -45,8 +45,8 @@ async function deleteWatcher(watcherId) {
           <div class="col-12">
             <div class="text-center">
               <span>
-                welcome back {{ account.name }} <img :src="account.picture" :alt="account.name"
-                  class="creator-img ms-2">
+                welcome back {{ account.name }}
+                <img :src="account.picture" :alt="account.name" class="creator-img ms-2">
               </span>
               <p class="mt-2">you are watching {{ watchedAlbums.length }} albums</p>
             </div>
