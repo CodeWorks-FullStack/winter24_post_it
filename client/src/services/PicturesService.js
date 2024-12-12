@@ -11,6 +11,7 @@ class PicturesService {
     AppState.pictures.push(picture)
   }
   async getPicturesByAlbumId(albumId) {
+    AppState.pictures = []
     const response = await api.get(`api/albums/${albumId}/pictures`)
     logger.log('GOT PICTURES', response.data)
     const pictures = response.data.map(picturePOJO => new Picture(picturePOJO))
