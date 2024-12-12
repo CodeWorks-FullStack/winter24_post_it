@@ -208,4 +208,10 @@ async function getPicturesByAlbumId() {
 b {
   text-shadow: 1px 1px black
 }
+
+@media screen AND (max-width: 600px) {
+  .masonry-container {
+    columns: 150px;
+  }
+}
 </style>
