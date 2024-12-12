@@ -2,6 +2,7 @@
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
 import ModalWrapper from './components/ModalWrapper.vue';
+import AlbumForm from './components/AlbumForm.vue';
 
 </script>
 
@@ -9,14 +10,16 @@ import ModalWrapper from './components/ModalWrapper.vue';
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="position-relative">
     <router-view />
   </main>
   <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
   </footer>
 
-  <ModalWrapper />
+  <ModalWrapper modalId="albumModal" modalTitle="Create Album">
+    <AlbumForm />
+  </ModalWrapper>
 </template>
 
 <style lang="scss">

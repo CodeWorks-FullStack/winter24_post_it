@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import ModalWrapper from '@/components/ModalWrapper.vue';
 import { albumsService } from '@/services/AlbumsService.js';
 import { picturesService } from '@/services/PicturesService.js';
 import { watchersService } from '@/services/WatchersService.js';
@@ -149,6 +150,10 @@ async function getPicturesByAlbumId() {
           </div>
         </section>
       </div>
+      <button data-bs-toggle="modal" data-bs-target="#pictureModal"
+        class="btn btn-success rounded-pill picture-button m-2">
+        Create Picture <i class="mdi mdi-plus-box"></i>
+      </button>
     </div>
     <div v-else class="container">
       <section class="row">
@@ -158,6 +163,9 @@ async function getPicturesByAlbumId() {
       </section>
     </div>
   </div>
+  <ModalWrapper modalId="pictureModal" modalTitle="Create Picture">
+    Picture form will go here
+  </ModalWrapper>
 </template>
 
 
@@ -175,5 +183,11 @@ async function getPicturesByAlbumId() {
 
 .picture-img {
   height: 20dvh;
+}
+
+.picture-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 </style>
