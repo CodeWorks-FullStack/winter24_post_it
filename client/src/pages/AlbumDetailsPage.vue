@@ -13,6 +13,7 @@ const account = computed(() => AppState.account)
 const watcherProfiles = computed(() => AppState.watcherProfiles)
 // NOTE some is an array method that will return true if your condition is ever met, and false if it is not
 const isWatching = computed(() => watcherProfiles.value.some(watcherProfile => watcherProfile.accountId == account.value?.id))
+const pictures = computed(() => AppState.pictures)
 
 const route = useRoute()
 
@@ -142,7 +143,11 @@ async function getPicturesByAlbumId() {
           </div>
         </section>
         <!-- ANCHOR pictures section -->
-        <section class="col-md-8"></section>
+        <section class="col-md-8">
+          <div v-for="picture in pictures" :key="picture.id">
+            <img :src="picture.imgUrl" :alt="'A picture posted by ' + picture.creator.name" class="picture-img">
+          </div>
+        </section>
       </div>
     </div>
     <div v-else class="container">
@@ -166,5 +171,9 @@ async function getPicturesByAlbumId() {
 
 .creator-img {
   height: 3rem;
+}
+
+.picture-img {
+  height: 20dvh;
 }
 </style>
