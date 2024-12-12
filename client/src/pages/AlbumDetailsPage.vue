@@ -120,7 +120,7 @@ async function getPicturesByAlbumId() {
       </section>
       <div class="row mt-3">
         <!-- ANCHOR watcher section -->
-        <section class="col-md-4 p-0">
+        <section class="col-md-4 p-md-0">
           <div class="d-flex">
             <div class="glass-card px-4 py-1 flex-grow-1">
               <b class="d-block">{{ watcherProfiles.length }}</b>
@@ -207,11 +207,5 @@ async function getPicturesByAlbumId() {
 
 b {
   text-shadow: 1px 1px black
-}
-
-@media screen AND (max-width: 600px) {
-  .masonry-container {
-    columns: 150px;
-  }
 }
 </style>

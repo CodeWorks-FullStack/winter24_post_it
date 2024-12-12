@@ -14,7 +14,7 @@ import AlbumForm from './components/AlbumForm.vue';
     <router-view />
   </main>
   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
+    Made with 🐈‍⬛🐈‍⬛🐈‍⬛🐈🐈🐈 by Jeremy
   </footer>
 
   <ModalWrapper modalId="albumModal" modalTitle="Create Album">
