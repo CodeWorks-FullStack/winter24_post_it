@@ -146,8 +146,12 @@ async function getPicturesByAlbumId() {
         </section>
         <!-- ANCHOR pictures section -->
         <section class="col-md-8">
-          <div v-for="picture in pictures" :key="picture.id">
-            <img :src="picture.imgUrl" :alt="'A picture posted by ' + picture.creator.name" class="picture-img">
+          <div class="masonry-container">
+            <div v-for="picture in pictures" :key="picture.id" class="mb-3">
+              <img :src="picture.imgUrl" :alt="'A picture posted by ' + picture.creator.name"
+                class="picture-img rounded">
+              <b>posted by {{ picture.creator.name }}</b>
+            </div>
           </div>
         </section>
       </div>
@@ -183,12 +187,25 @@ async function getPicturesByAlbumId() {
 }
 
 .picture-img {
-  height: 20dvh;
+  width: 100%
 }
 
 .picture-button {
   position: fixed;
   right: 0;
   bottom: 0;
+}
+
+.masonry-container {
+  columns: 200px;
+
+  >* {
+    break-inside: avoid;
+    display: inline-block
+  }
+}
+
+b {
+  text-shadow: 1px 1px black
 }
 </style>

@@ -10,13 +10,20 @@ const route = useRoute()
 
 const editablePictureData = ref({
   imgUrl: '',
-  albumId: route.params.albumId
+  albumId: ''
 })
 
 async function createPicture() {
   try {
+    // @ts-ignore
+    editablePictureData.value.albumId = route.params.albumId
     await picturesService.createPicture(editablePictureData.value)
-    editablePictureData.value.imgUrl = ''
+
+    editablePictureData.value = {
+      imgUrl: '',
+      albumId: ''
+    }
+
     Modal.getInstance('#pictureModal').hide()
   } catch (error) {
     Pop.meow(error)
