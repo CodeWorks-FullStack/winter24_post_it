@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { albumsService } from '@/services/AlbumsService.js';
+import { picturesService } from '@/services/PicturesService.js';
 import { watchersService } from '@/services/WatchersService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -18,6 +19,7 @@ const route = useRoute()
 watch(route, () => {
   getAlbumById()
   getWatcherProfilesByAlbumId()
+  getPicturesByAlbumId()
 }, { immediate: true })
 
 async function getAlbumById() {
@@ -62,6 +64,16 @@ async function createWatcher() {
   } catch (error) {
     Pop.meow(error)
     logger.error('[CREATING WATCHER]', error)
+  }
+}
+
+async function getPicturesByAlbumId() {
+  try {
+    const albumId = route.params.albumId
+    await picturesService.getPicturesByAlbumId(albumId)
+  } catch (error) {
+    Pop.meow(error)
+    logger.error('[GETTING PICTURES]', error)
   }
 }
 </script>
