@@ -14,6 +14,11 @@ class PicturesService {
     await picture.populate('creator', 'name picture')
     return picture
   }
+  async getPicturesByAlbumId(albumId) {
+    const pictures = await dbContext.Pictures.find({ albumId: albumId }).populate('creator', 'name picture')
+    return pictures
+  }
 }
+
 
 export const picturesService = new PicturesService()
