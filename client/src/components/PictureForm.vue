@@ -35,6 +35,10 @@ async function createPicture() {
 
 <template>
   <form @submit.prevent="createPicture()">
+    <div v-if="editablePictureData.imgUrl" class="mb-3">
+      <img :src="editablePictureData.imgUrl" alt="Your picture" class="w-100">
+      <p>Image preview</p>
+    </div>
     <div class="form-floating mb-3">
       <input v-model="editablePictureData.imgUrl" type="url" class="form-control" id="imgUrl"
         placeholder="Picture ImgUrl" required maxlength="2000">
