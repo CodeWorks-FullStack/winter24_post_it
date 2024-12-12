@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import ModalWrapper from '@/components/ModalWrapper.vue';
+import PictureForm from '@/components/PictureForm.vue';
 import { albumsService } from '@/services/AlbumsService.js';
 import { picturesService } from '@/services/PicturesService.js';
 import { watchersService } from '@/services/WatchersService.js';
@@ -164,7 +165,7 @@ async function getPicturesByAlbumId() {
     </div>
   </div>
   <ModalWrapper modalId="pictureModal" modalTitle="Create Picture">
-    Picture form will go here
+    <PictureForm />
   </ModalWrapper>
 </template>
 
