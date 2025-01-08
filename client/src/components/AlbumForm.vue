@@ -39,7 +39,7 @@ async function createAlbum() {
     Modal.getInstance('#albumModal').hide()
 
     // navigates to the album details page for newly created album
-    router.push({ name: 'Album Details', params: { albumId: album.id } })
+    // router.push({ name: 'Album Details', params: { albumId: album.id } })
   } catch (error) {
     Pop.meow(error)
     logger.error('[CREATING ALBUM]', error)
