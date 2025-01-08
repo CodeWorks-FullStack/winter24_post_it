@@ -12,6 +12,7 @@ class PicturesService {
 
     const picture = await dbContext.Pictures.create(pictureData)
     await picture.populate('creator', 'name picture')
+    await picture.populate('album')
     return picture
   }
   async getPicturesByAlbumId(albumId) {
