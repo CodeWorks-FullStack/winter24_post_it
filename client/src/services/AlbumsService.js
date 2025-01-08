@@ -22,7 +22,7 @@ class AlbumsService {
     logger.log('CREATED ALBUM', response.data)
     const album = new Album(response.data)
     // NOTE only unshift if api sorts data showing newest first, otherwise push
-    AppState.albums.unshift(album)
+    // AppState.albums.unshift(album) albumhandler will do this for us
     return album
   }
   async getAlbums() {
