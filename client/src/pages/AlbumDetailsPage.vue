@@ -2,13 +2,14 @@
 import { AppState } from '@/AppState.js';
 import ModalWrapper from '@/components/ModalWrapper.vue';
 import PictureForm from '@/components/PictureForm.vue';
+import { albumHandler } from '@/handlers/AlbumHandler.js';
 import { albumsService } from '@/services/AlbumsService.js';
 import { picturesService } from '@/services/PicturesService.js';
 import { watchersService } from '@/services/WatchersService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
 
 const album = computed(() => AppState.activeAlbum)
 const account = computed(() => AppState.account)
@@ -23,7 +24,12 @@ watch(route, () => {
   getAlbumById()
   getWatcherProfilesByAlbumId()
   getPicturesByAlbumId()
+  joinAlbumRoom()
 }, { immediate: true })
+
+onBeforeRouteLeave(() => {
+  leaveAlbumRoom()
+})
 
 async function getAlbumById() {
   try {
@@ -78,6 +84,13 @@ async function getPicturesByAlbumId() {
     Pop.meow(error)
     logger.error('[GETTING PICTURES]', error)
   }
+}
+
+function joinAlbumRoom() {
+  albumHandler.emit('JOIN_ROOM', route.params.albumId)
+}
+function leaveAlbumRoom() {
+  albumHandler.emit('LEAVE_ROOM', route.params.albumId)
 }
 </script>
 
