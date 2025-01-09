@@ -1,4 +1,5 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
+import sharp from "sharp"
 
 const awsRegion = process.env.AWS_REGION
 const awsBucket = process.env.AWS_BUCKET
@@ -13,11 +14,17 @@ const s3Client = new S3Client({
 
 class UploadsService {
   async uploadImage(imageFile, userId) {
+
+    const sharpData = sharp(imageFile.data)
+    sharpData.resize({ width: 300 })
+    const jpeg = await sharpData.jpeg({ quality: 60, chromaSubsampling: '4:4:4' }).toBuffer()
+
+    // Uploading image to AWS S3
     const uploadCommand = new PutObjectCommand({
       Bucket: awsBucket,
       Key: `${userId}/${imageFile.name}`,
-      Body: imageFile.data,
-      ContentType: imageFile.mimetype,
+      Body: jpeg,
+      ContentType: 'image/jpeg',
       CacheControl: 'max-age=36000'
     })
     const s3Response = await s3Client.send(uploadCommand)
