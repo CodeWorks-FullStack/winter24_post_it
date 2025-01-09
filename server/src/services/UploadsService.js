@@ -16,15 +16,16 @@ class UploadsService {
   async uploadImage(imageFile, userId) {
 
     const sharpData = sharp(imageFile.data)
-    sharpData.resize({ width: 300 })
-    const jpeg = await sharpData.jpeg({ quality: 60, chromaSubsampling: '4:4:4' }).toBuffer()
+    sharpData.resize({ width: 500 })
+    // const jpeg = await sharpData.jpeg({ quality: 60, chromaSubsampling: '4:4:4' }).toBuffer()
+    const webp = await sharpData.webp({ quality: 40, nearLossless: true }).toBuffer()
 
     // Uploading image to AWS S3
     const uploadCommand = new PutObjectCommand({
       Bucket: awsBucket,
       Key: `${userId}/${imageFile.name}`,
-      Body: jpeg,
-      ContentType: 'image/jpeg',
+      Body: webp,
+      ContentType: 'image/webp',
       CacheControl: 'max-age=36000'
     })
     const s3Response = await s3Client.send(uploadCommand)
